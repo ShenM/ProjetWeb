@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head>
+        <title>TP Programmation WEB Côté Client</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Christophe Brouard">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    
+    <body>
+        <header>
+            <p>Université Pierre Mendès France - IUT2 - Département informatique<br>
+            Module 4103C - 2014-15 </p>
+        </header>
+        
+        <h1>Projet M4103C - Réalisation d'un bureau virtuel</h1>
+        <p>Ce document est consultable sur l'intranet du département. </p>
+        <hr>
+
+        
+        <h2>Objectifs du Projet</h2>
+        <ul>
+            <li>Mettre en application vos connaissances sur JavaScript, AJAX, JSON, JQuery, JQuery UI (et aussi vos connaissances en PHP, HTML, algorithmique;...) dans une relative autonomie (en comparaison des TPs).</li>
+        </ul>
+
+        <h2>Présentation générale</h2>
+ 
+        <h3>Sujet</h3>
+        <p> <img src="bv.jpg"> Dans la mouvance du  <a href="http://fr.wikipedia.org/wiki/Cloud_computing" target="_blank">cloud computing</a>, le <a href="http://fr.wikipedia.org/wiki/Bureau_virtuel_%28travail%29" target="_blank">bureau virtuel</a> 
+désigne un logiciel permettant à tout utilisateur disposant d'une connexion internet d'accéder à ses données et à des logiciels variés résidants sur des serveurs distants. 
+Cette solution a de nombreux avantages. L'utilisateur est libéré des tâches d'administration (installation, mise à jour des logiciels). 
+Il peut aussi utiliser n'importe quel ordinateur, tablette ou smartphone à sa disposition. Un autre intérêt réside aussi dans la possibilité de partager facilement ses données avec un autre utilisateur ayant accès au même serveur.</p>
+        <p> L'objet de ce projet est de créer un tel outil. JavaScript et les librairies qui en dérivent sont parfaitement adaptés à ce type de développement. En effet, grâce à ces librairies, il est maintenant possible de développer assez facilement des applications web avec des interfaces utilisateur très riches qui n'ont plus rien à envier aux applications fonctionnant en local. Il est aussi possible d'exécuter sur les postes clients, toute la partie des traitements qui n'implique pas les données (déchargeant ainsi le serveur des tâches pour lesquelles il n'est pas utile) tout en récupérant et sauvegardant les données sur le serveur, via des appels AJAX. </p>
+        <p> Vous allez développer une application utile que vous pourrez paramétrer comme il vous plaira en y ajoutant notamment les logiciels que vous souhaiterez. Vous pourrez ainsi développer vos propres outils de travail. Vous pourrez aussi par la suite utiliser votre application pour un travail collaboratif.</p>
+
+        <h3>Organisation du travail</h3>
+        <p>Le projet est réalisé en binôme. Il commence le mardi 17 mars 2015 et se termine le vendredi 3 avril 2015. Le développement se décompose en 5 parties:
+            <ul>
+                <li>La partie 1 concerne la mise en place du squelette de l'inteface avec JQuery UI</li>
+                <li>La partie 2 porte sur le développement d'un éditeur de texte minimaliste (qui pourra être enrichi par la suite)</li>
+                <li>La partie 3 porte sur le développement de la gestion des l'arborescence des répertoires de l'utilisateur avec le plugin JQuery jsTree </li>
+                <li>La partie 4 porte sur la connexion entre l'arborescence et la zone d'édition</li>
+                <li>La partie 5 porte  sur des développements libres</li>
+            </ul>
+
+Le code du projet doit être à 100% original au binôme, c'est à dire non issu de codes récupérées du WEB (à part ceux dont l'utilisation est mentionnée explicitement dans l'énoncé) ou de toute source ou personne extérieure au binôme. Les binômes peuvent s'aider mutuellement mais sans s'échanger de code. Vous devez vous comporter comme des "entreprises indépendantes" ayant un contrat avec l'IUT.
+
+
+        <h3>Evaluation</h3>
+        <p>L'évaluation du projet aura lieu lors de la dernière scéance de TP de la semaine du 30 mars 2015. Chaque binôme complètera une fiche (distribuée au moment de l'évaluation) sur laquelle il mentionnera les fonctionnalités qui ont été développées (et éventuellement celles en cours de développement). Chaque binôme présentera à l'enseignant le site réalisé (5 minutes) et répondra à ses questions (5 minutes). La note finale dépendra du nombre et de l'importance des fonctionnalités développées, de la qualité du codage et de la maîtrise du projet. Par ailleurs, un fichier texte <tt>readme</tt> donnant quelques explications sur l'installation et l'utilisation du logiciel et précisant les dernières avancées (par rapport à la fiche d'évaluation) devra être ajouté dans le répertoire contenant votre code. Ce répertoire zipé devra être envoyé par mail à votre enseignant de TP au plus tard le <strong>vendredi 3 avril à minuit</strong>.</p>
+
+
+        <h2>Partie 1 : Construction du squelette de l'interface avec JQuery UI</h2>
+        <p> <img src="squelette50.png"/> Nous allons réaliser le squelette de l'interface (voir image ci-contre) du bureau virtuel. Cette interface sera composée d'une zone accordéon (à gauche) et d'une zone d'édition contenant des onglets (à droite). La zone accordéon contiendra l'arborescence de répertoires de l'utilisateur (<tt>HomeDir</tt> que nous développerons par la suite) et différents outils (que nous intégrerons par la suite). Les onglets de la zone d'édition contiendront les documents ouverts par l'utilisateur (pour l'instant, on les laissera vide). Vous devez réaliser la zone accordéon avec la widget accordion de JQuery UI (<a href="http://jqueryui.com/accordion/" target="_blank">http://jqueryui.com/accordion/</a>) et les onglets avec la widget tabs (<a href="http://jqueryui.com/tabs/" target="_blank">http://jqueryui.com/tabs/</a>).
+        Attention pour que l'accordéon occupe la totalité de la hauteur de la fenêtre vous devrez utiliser l'attribut <tt>heightStyle: "fill"</tt> au moment de la création de la widget (voir <a href="http://api.jqueryui.com/accordion/" target="_blank">http://api.jqueryui.com/accordion/</a>). Pour réaliser cette interface, vous devez créer 3 fichiers. Un fichier <tt>bv.html</tt> contenant la description html de la page, un fichier <tt>bv.css</tt> permettant de dimensionner les différentes parties de la page, de positionner les éléments les uns par rapport aux autres et un fichier <tt>bv.js</tt> contenant une fonction <tt>init</tt> déclenchée sur l'événement <tt>load</tt> de l'élément <tt>body</tt> que vous compléterez avec les nécessaires initialisations des différentes widgets. Tout le code css et js nécessaire de JQuery UI est disponible <a href="./" target="_blank">ici</a>
+</p>
+
+        <h2>Partie 2 : Développement d'un éditeur de texte</h2>
+        <p> <img src="editeur250.png"/> Les onglets de la zone édition permettront d'éditer des documents de l'utilisateur. On peut imaginer permettre à l'utilisateur d'éditer différents types de documents : documents texte, feuilles de calcul, dessins, etc... Dans un premier temps, nous nous limiterons aux documents texte. Nous allons donc réaliser un petit traitement de texte implémentant :
+            <ul>
+                <li>Les fonctions de sauvegarde/récupération du texte saisi (sur le serveur par appel ajax)</li> 
+                <li>les fonctions undo/redo </li>
+                <li>les fonctions de mise en forme suivante : mise en gras, mise en italique, augmentation/diminution de la taille des caractères, soulignement, justification (gauche et centrée)</li>
+                <li>des fonctions de création de listes (numérotées ou pas)</li>
+            </ul>
+            <p>On se limitera dans un premier temps à ces fonctions que l'on complètera éventuellement par la suite. En vous inspirant de l'exemple final donné à l'url <a href="https://developer.mozilla.org/fr/docs/Rich-Text_Editing_in_Mozilla" target="_blank">https://developer.mozilla.org/fr/docs/Rich-Text_Editing_in_Mozilla</a> et recopié dans <tt>be.html</tt> que vous trouverez <a href="./">ici</a>, réalisez un éditeur de texte conforme à l'image ci-contre.
+            La fonction centrale de l'API du code donné en exemple est  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand" target="_blank"><tt>execCommand</tt> </a>. Il faut bien comprendre sur quoi et comment cette fonction agit. Si nécessaire, faites des tests.
+            </p>
+            <p> Par ailleurs, comme dans l'image, l'éditeur apparaîtra dans les onglets. 
+Gérez le changement d'onglet courant en vous appuyant sur l'événement  <a href="http://api.jqueryui.com/tabs/#event-activate" target="_blank">activate</a> de la widget tab. Comme dans l'image, un bandeau d'icônes placé au-dessus du texte permettra de déclencher les actions par des clics souris. 
+Enfin, afin de réaliser cet éditeur, une collection d'icônes visualisables <a href="fugue.png" target="_blank">ici</a> (créée par Yusuke Kamiyamane et sous <a href="http://fr.wikipedia.org/wiki/Creative_Commons" target="_blank">Creative Common License</a> ) est laissée à votre disposition dans le répertoire <tt>icons</tt> que vous trouverez <a href="./" target="_blank">ici</a></p>
+
+        <h2>Partie 3 : Gestion d'une aborescence de répertoires avec jsTree.js</h2>
+        <p> <img src="tree2500.png"/> Afin de permettre à l'utilisateur de créer une arborescence de répertoires, nous allons nous appuyer sur le plugin JQuery  <a href="http://www.jstree.com/" target="_blank">jsTree</a>. Le code nécessaire à l'utilisation du plugin est dans le répertoire <tt>dist</tt> que vous pourrez récupérer <a href="./" target="_blank">ici</a>. L'intégralité du code relatif au plugin jsTree et des explications complémentaires sur son utilisation sont disponibles sur <a href="https://github.com/vakata/jstree#interacting-with-the-tree-using-the-api" target="_blank">github</a> . 
+Un exemple de code utilisant le plugin et dont le résultat n'est pas très éloigné de notre objectif est donné dans <tt>tree.html</tt> que vous pourrez récupérer <a href="./" target="_blank">ici</a>. Testez cet exemple (créez des répertoires, des fichiers, déplacez les par drag&drop, renommez les, supprimez les) et analysez le code  (aidez vous de la <a href="http://www.jstree.com/api/" target="_blank">documentation</a> ).</p><p> En recopiant tout ce qui est nécessaire dans votre répertoire de travail, ajoutez l'arborescence dans la partie <tt>HomeDir</tt> de votre accordéon. Vous noterez que l'arbre est récupéré au format json au moyen d'un appel ajax au serveur. Complétez votre code pour qu'une modification de l'arbre entraîne sa sauvegarde sur le serveur (appel ajax) et permette ainsi lors du rechargement de la page de ne pas perdre l'arbre édité précédemment.
+Attention, il faut déclencher la sauvegarde sur 4 événements (création, suppression, renomage, déplacement). Ces événements portent le noms suivants : <tt>create_node</tt>, <tt>remove_node</tt>, 
+<tt>rename_node</tt> et <tt>move_node</tt>.  Pour la gestion des événements dans l'arbre, 
+vous vous reporterez à <a href="http://www.jstree.com/docs/events/" target="_blank">http://www.jstree.com/docs/events/</a> 
+</p>
+
+        <h2>Partie 4 : Coordination de l'arborescence de répertoires avec la zone d'édition</h2>
+        <p> Nous allons maintenant coordonner l'aborescence avec le contenu de la zone d'édition. Le comportement attendu est le suivant :</p>
+            <ul>
+                <li>un clic sur une feuille de l'arbre (représentant un document) ajoute un onglet dans la zone d'édition contenant le document correspondant et lui donne le focus (au cas où l'onglet est déjà présent, il récupère le focus) </li> 
+                <li>la création d'un nouveau document ajoute un nouvel onglet dans la zone d'édition portant le nom du nouveau document et lui donne le focus</li>
+                <li>la suppression d'une feuille de l'arbre supprime l'éventuel onglet correspondant et supprime le fichier correspondant sur le serveur (après demande de confirmation). Seule, la suppression de répertoire vide est autorisée</li>
+ 		  <li>le renommage d'un document modifie le nom de l'onglet correspondant (on ne gèrera pas les problèmes de duplications des noms de documents. On suppose donc qu'ils ont tous des noms différents)</tt> 
+            </ul> Indication : en JQuery, pour tester si un élément ayant l'identifiant <tt>id</tt> n'existe pas déjà, il suffit d'écrire <tt>if($("#id").length){...</tt>.
+            Pour les manipulations d'onglets (ajout/suppression), 
+vous vous reporterez à <a href="http://jqueryui.com/tabs/#manipulation" target="_blank">http://jqueryui.com/tabs/#manipulation</a> et en particulier à <a href="http://api.jqueryui.com/tabs/#option-active" target="_blank">http://api.jqueryui.com/tabs/#option-active</a> pour gérer le focus sur les onglets.
+Pour la gestion des événements dans l'arbre, vous vous reporterez à <a href="http://www.jstree.com/docs/events/" target="_blank">
+http://www.jstree.com/docs/events/</a>. Les événements qui vous seront utiles dans cette partie sont <tt>select_node.jstree</tt>, <tt>rename_node.jstree</tt> et <tt>delete_node.jstree</tt>
+        <h2>Partie 5 : Développements libres</h2>
+        <p><img src="calcul500.png"/> Dans cette dernière partie, vous allez personnaliser votre bureau virtuel en l'enrichissant comme vous le souhaiterez. 
+        <ul>
+            <li>Enrichissement de l'éditeur de texte</li>
+            <li>Création de nouveaux types de documents et donc de nouveaux types d'éditeurs (tableur, éditeur de code, de graphes, de dessins,...)</li>
+            <li>Intégration de widgets/plugins existants (calendrier, calculatrice, jeux,...) dans l'accordéon </li>
+            <li>Gestion du partage de documents par plusieurs utilisateurs (il faut donc prévoir une page d'accueil avec login)</li>
+            <li>Gestion de préférences utilisateur dans l'accordéon</li>
+            <li>D'autres idées peuvent être les bienvenues. Discutez-en préalablement avec votre enseignant </li>
+        </ul>
+
+        
+        <!-- ---------------------------------------------------------------------- -->
+       
+        </body></html>
