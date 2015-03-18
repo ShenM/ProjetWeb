@@ -9,15 +9,10 @@ and open the template in the editor.
         <title>Projet</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<<<<<<< HEAD
-        
-=======
         <link rel="stylesheet" href="style2.css">
 
->>>>>>> e4b92c4c83d461ca596bb8d7f7e0ca30867a92ff
         <script>
             $(function() {
                 $("#accordion").accordion();
