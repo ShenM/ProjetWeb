@@ -31,11 +31,14 @@
                         {
                             node = tree.create_node(node);
                             tree.edit(node);
+
+
                         }
                     },
             "item2":
                     {
                         "label": "Create File",
+
                         "action": function()
                         {
                             node = tree.create_node(node, {"type": "file"});
@@ -44,43 +47,66 @@
                     },
             "item3":
                     {
-                        "label": "Rename",
-                        "action": function(obj)
-                        {
-                            tree.edit(node);
-                        }
-                    },
-            "item4":
-                    {
-                        "label": "Remove",
-                        "action": function(obj)
-                        {
-                            tree.delete_node(node);
-                        }
-                    }
-        };
+                		"label": "Rename",
+                		"action": function (obj) 
+                		{ 
+                			tree.edit(node);
+                		}
+                         
+            		},                         
+            										
+            		"item4": 
+            		{
+                		"label": "Remove",
+                		"action": function (obj)
+                		{ 
+                			tree.delete_node(node);
+                            save();
+                		}
+            		}
+        		};
     }
 
 
-    function init()
-    {
-        // initialisation de l'arbre
-        $('#tree').jstree({
-            'core': {
-                "animation": 0,
-                "check_callback": true,
-                "themes": {"stripes": true},
-                'data': {"url": "./root.json", "dataType": "json"}// needed only if you do not supply JSON headers
-            },
-            "types": {
-                "#": {"max_children": 1, "max_depth": 4, "valid_children": ["root"]},
-                "root": {'icon': "./icons/folder.png", "valid_children": ["default"]},
-                "default": {'icon': "./icons/folder.png", "valid_children": ["default", "file"]},
-                "file": {'icon': "./icons/blog.png", "valid_children": []}
-            },
-            "plugins": ["contextmenu", "dnd", "state", "types", "wholerow"],
-            "contextmenu": {"items": createmenu}
-        });
-    }</script>
-    </body>
+
+	function init()
+	{
+		// initialisation de l'arbre
+		$('#tree').jstree({
+                    'core' : {
+                    		"animation" : 0,
+                    		"check_callback" : true,
+                    		"themes" : { "stripes" : true }, 
+                            'data' : {"url" : "./root2.json", "dataType" : "json" }// needed only if you do not supply JSON headers
+                              },
+                    "types" : {
+                    			"#" : { "max_children" : 1, "max_depth" : 4, "valid_children" : ["root"] },
+                   				 "root" : { 'icon':"./icons/folder.png", "valid_children" : ["default"] },
+                    			"default" : { 'icon':"./icons/folder.png","valid_children" : ["default","file"] },
+                    			"file" : { 'icon' :"./icons/blog.png", "valid_children" : [] }
+                    			},
+                    "plugins" : [ "contextmenu", "dnd", "state", "types", "wholerow"],
+                    "contextmenu":{ "items": createmenu}
+                  });
+
+        $("#tree").on('rename_node.jstree', function (e, data) {
+            save();
+        }).jstree();
+
+        $("#tree").on('move_node.jstree', function (e, data) {
+            save();
+        }).jstree();
+
+	}
+    function save(){
+        var x = $("#tree").data().jstree.get_json();
+        x = "data="+JSON.stringify(x);
+        $("body").append(x);
+        $.post("server_save.php",x);
+    }
+
+
+
+    </script>
+</body>
 </html>
